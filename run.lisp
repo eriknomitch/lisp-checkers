@@ -1,5 +1,28 @@
+;; -----------------------------------------------
+;; UTILITY ---------------------------------------
+;; -----------------------------------------------
+(defun make-index-list (length)
+  (let ((index -1))
+    (map-into (make-list length)
+              (lambda ()
+                (incf index)))))
+
+;; -----------------------------------------------
+;; CONSTANTS -------------------------------------
+;; -----------------------------------------------
 (defconstant +board-size+ 8)
 
+;; -----------------------------------------------
+;; GENERICS --------------------------------------
+;; -----------------------------------------------
+(defgeneric board-find-checker (board x y))
+(defgeneric board-display (board))
+(defgeneric board-lookup (board x y))
+(defgeneric checker-status (checker))
+
+;; -----------------------------------------------
+;; CLASS->CHECKER --------------------------------
+;; -----------------------------------------------
 (defclass checker ()
   ((x :accessor checker-x
       :initarg :x
@@ -22,12 +45,6 @@
   (apply #'make-instance
          (append '(checker) make-instance-args)))
 
-(defun make-index-list (length)
-  (let ((index -1))
-    (map-into (make-list length)
-              (lambda ()
-                (incf index)))))
-
 (defun make-checkers-for-row (row color &optional (offset 0))
   (let ((checkers '()))
     (dotimes (x +board-size+)
@@ -47,6 +64,9 @@
     (make-checkers-for-color 0 :red)
     (make-checkers-for-color 5 :black)))
 
+;; -----------------------------------------------
+;; CLASS->BOARD ----------------------------------
+;; -----------------------------------------------
 (defclass board ()
   ;; Board "has many" checkers.
   ((checkers :accessor board-checkers
@@ -72,6 +92,9 @@
       (format t "~a" (board-lookup board x y)))
     (format t "~%")))
 
+;; -----------------------------------------------
+;; MAIN ------------------------------------------
+;; -----------------------------------------------
 (defvar *board* (make-instance 'board))
 
 (board-display *board*)
