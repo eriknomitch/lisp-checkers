@@ -36,11 +36,15 @@
          :initarg :king
          :initform nil)))
 
+;; Methods
+;; - - - - - - - - - - - - - - - - - - - - - - - -
 (defmethod checker-status ((checker checker))
-  (if (eq (checker-color checker) :black)
-    "O"
-    "x"))
+  (if (checker-king checker)
+    (if (eq (checker-color checker) :black) "K" "k")
+    (if (eq (checker-color checker) :black) "o" "x")))
 
+;; Functions
+;; - - - - - - - - - - - - - - - - - - - - - - - -
 (defun make-checker (&rest make-instance-args)
   (apply #'make-instance
          (append '(checker) make-instance-args)))
@@ -73,6 +77,8 @@
              :initarg :checkers
              :initform (make-checkers-for-board))))
 
+;; Methods
+;; - - - - - - - - - - - - - - - - - - - - - - - -
 (defmethod board-find-checker ((board board) x y)
   (find-if #'(lambda (checker)
                (and (= (checker-x checker) x)
