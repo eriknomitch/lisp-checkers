@@ -39,9 +39,12 @@
 ;; Methods
 ;; - - - - - - - - - - - - - - - - - - - - - - - -
 (defmethod checker-status ((checker checker))
-  (if (checker-king checker)
-    (if (eq (checker-color checker) :black) "K" "k")
-    (if (eq (checker-color checker) :black) "o" "x")))
+  (let ((status (if (eq (checker-color checker) :black)
+                  "o"
+                  "x")))
+    (if (checker-king checker)
+      (string-upcase status)
+      status)))
 
 ;; Functions
 ;; - - - - - - - - - - - - - - - - - - - - - - - -
