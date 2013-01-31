@@ -57,16 +57,16 @@
               checkers)))
     checkers))
 
-(defun make-checkers-for-color (start color)
+(defun make-checkers-for-color (start color &optional (mod-offset 0))
   (let ((checkers '()))
     (dotimes (row 3)
-      (setf checkers (append checkers (make-checkers-for-row (+ row start) color (mod row 2)))))
+      (setf checkers (append checkers (make-checkers-for-row (+ row start) color (mod (+ row mod-offset) 2)))))
     checkers))
 
 (defun make-checkers-for-board ()
   (append
     (make-checkers-for-color 0 :red)
-    (make-checkers-for-color 5 :black)))
+    (make-checkers-for-color 5 :black 1)))
 
 ;; -----------------------------------------------
 ;; CLASS->BOARD ----------------------------------
