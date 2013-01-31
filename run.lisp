@@ -110,3 +110,11 @@
 
 (board-display *board*)
 
+;; x  -  x  -  -  -  o  -  
+;; -  x  -  -  -  o  -  o  
+;; x  -  x  -  -  -  o  -  
+;; -  x  -  -  -  o  -  o  
+;; x  -  x  -  -  -  o  -  
+;; -  x  -  -  -  o  -  o  
+;; x  -  x  -  -  -  o  -  
+;; -  x  -  -  -  o  -  o  
